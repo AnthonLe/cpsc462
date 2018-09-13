@@ -6,3 +6,5 @@ Tetris Game
 Members:
 
 Anthony Le        anthonyle63@csu.fullerton.edu
+
+Dominick Hem      domhem@csu.fullerton.edu
