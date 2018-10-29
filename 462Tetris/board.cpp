@@ -69,7 +69,18 @@ void Board::DisplayBoard(Game &gameobj)
 	//check the gameover status
 	if (gameobj.gameover == true)
 	{
+		DisplayGameOver();
 		clear();
 
 	}
+}
+
+int Board::DisplayGameOver()
+{
+	clear();
+	cout << "You suck\n";
+
+	system("pause");
+
+	return 0;
 }

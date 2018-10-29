@@ -1,7 +1,8 @@
 #include <iostream>
-#include <iostream>
+#include <iomanip>
 #include "menu.h"
 #include "game.h"
+#include "brain.h"
 using namespace std;
 
 //clear the console/terminal by creating a lot of newlines
@@ -14,6 +15,7 @@ void Menu::clear()
 
 void Menu :: DisplayWelcomeInterface()
 {
+	clear();
 	cout << "======================================================\n"
 		" #####  ###### #####  ######    ###    #####\n"
 		"   #    #        #    #     #    #    #     \n"
@@ -30,31 +32,8 @@ void Menu :: DisplayWelcomeInterface()
 		">> ";
 }
 
-void Menu::DisplaySettingsMenu()
-{
-	clear();
-	cout << "===========================================================\n"
-		" #####   ###### #####  #####  ###  ##    #    ######    #####   \n"
-		"#        #        #      #     #   # #   #   #         #        \n"
-		" #####   #####    #      #     #   #  #  #  #     ###   #####  \n"
-		"      #  #        #      #     #   #   # #   #      #        # \n"
-		" #####   ######   #      #    ###  #    ##    #####     #####  \n"
-
-
-		"===========================================================\n";
-
-}
-
-int Menu::DisplayGameOver()
-{
-	clear();
-	cout << "You suck\n";
-
-	return 0;
-}
-
 //function checks to see if a valid choice was made before setting it
-void Menu::SetChoice(int c)
+void Menu::SetChoice(Game &gameobj, Brain &brainobj, int c)
 {
 	switch(c)
 	{
@@ -69,26 +48,26 @@ void Menu::SetChoice(int c)
 	}
 
 	choice = c;
-	DoChoice(choice);
+	DoChoice(gameobj, brainobj, choice);
 }
 
 //call the correct option according to the player choice
-int Menu::DoChoice(int choice)
+int Menu::DoChoice(Game &gameobj, Brain &brainobj, int choice)
 {
-	//create Game object to begin a new game
-	Game *gameTest = new Game();
+	
 	switch (choice)
 	{
 	case 1:
-		gameTest->StartNewGame(*gameTest);
+		gameobj.StartNewGame(gameobj, brainobj);
 		break;
 	case 2:
-		DisplaySettingsMenu();
+		brainobj.DisplaySettingsMenu();
 		break;
 	case 3:
 		return 0;
 	case 0:
-		std::cerr << "None of the options were chosen" << std::endl;
+		cerr << "None of the options were chosen" << std::endl;
+		system("pause");
 		return -1;
 	}
 	return 0;

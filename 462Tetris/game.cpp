@@ -2,6 +2,7 @@
 #include "menu.h"
 #include "board.h"
 #include "block.h"
+#include "brain.h"
 #include <iostream>
 #include <conio.h>
 
@@ -12,22 +13,19 @@ Game::Game() {
 }
 
 
-void Game::StartNewGame(Game &gameobj)
+void Game::StartNewGame(Game &gameobj, Brain &brainobj)
 {
 
 	//Create board object to create and display the board
 	Board *boardTest = new Board();
 	boardTest->CreateBoard(gameobj);
-	UpdateGame(gameobj, *boardTest);
+	UpdateGame(gameobj, brainobj, *boardTest);
 
 }
 
-void Game::UpdateGame(Game &gameobj, Board &boardobj)
+void Game::UpdateGame(Game &gameobj, Brain &brainobj, Board &boardobj)
 {
 	size_t timer = 0;
-	//determines the fall speed of the blocks
-	//lower number = faster speed
-	size_t gamespeed = 20000;
 
 	//Create the first block
 	Block *blockTest = new Block();
@@ -48,7 +46,7 @@ void Game::UpdateGame(Game &gameobj, Board &boardobj)
 		#endif
 
 		//time increments until it reaches the limit set by the GAMESPEED
-		if (timer < gamespeed)
+		if (timer < brainobj.gamespeed)
 		{
 			timer++;
 		}

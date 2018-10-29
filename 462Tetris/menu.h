@@ -1,17 +1,18 @@
 #pragma once
 
+class Game;
+class Brain;
+
 class Menu
 {
 public:
 	int choice;
-	void SetChoice(int c);
+	void SetChoice(Game &obj, Brain &obj2, int c);
 	void DisplayWelcomeInterface();
-	void DisplaySettingsMenu();
-	int DisplayGameOver();
 
 private:
 	//int getChoice() { return choice; }
-	int DoChoice(int choice);
+	int DoChoice(Game &obj, Brain &obj2, int choice);
 	//clear the terminal
 	void clear();
 };
