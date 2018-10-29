@@ -18,6 +18,8 @@ void Brain :: SetSpeed() {
 	int s;
 	cin >> s;
 
+	//40000 is the speed for the slowest setting
+	//4000 for the fastest
 	gamespeed = 40000 / s;
 	difficulty = s;
 
