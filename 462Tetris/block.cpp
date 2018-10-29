@@ -126,8 +126,8 @@ void Block::PlayerInput(Game &gameobj, Board &boardobj)
 			MoveBlock(gameobj, boardobj, x, y + 1);
 		}
 		break;
-	//case ' ': //spacebar
-	//	rotateBlock();
+	case ' ': //spacebar
+		RotateBlock(boardobj, gameobj);
 	}
 
 }
@@ -158,4 +158,52 @@ void Block::MoveBlock(Game &gameobj, Board &boardobj, int bx, int by)
 	//redisplay the block in its new position 
 	boardobj.DisplayBoard(gameobj);
 
+}
+
+bool Block::RotateBlock(Board &boardobj, Game &gameobj)
+{
+	//create 4x4 array to store the current block
+	int tmp[4][4];
+
+	for (size_t i = 0; i < 4; i++)
+	{ //Save temporary block
+		for (size_t j = 0; j < 4; j++)
+		{
+			tmp[i][j] = block[i][j];
+		}
+	}
+
+	for (size_t i = 0; i < 4; i++)
+	{ //Rotate 90 degrees
+		for (size_t j = 0; j < 4; j++)
+		{
+			block[i][j] = tmp[3 - j][i];
+		}
+	}
+
+	if (Collide(boardobj, x, y))
+	{ // Revert the rotation if it would cause a collision
+		for (size_t i = 0; i < 4; i++)
+		{
+			for (size_t j = 0; j < 4; j++)
+			{
+				block[i][j] = tmp[i][j];
+			}
+		}
+		return true;
+	}
+
+	for (size_t i = 0; i < 4; i++)
+	{
+		for (size_t j = 0; j < 4; j++)
+		{
+			//remove the temporary block and put the new rotated block on the field
+			boardobj.board[y + i][x + j] -= tmp[i][j];
+			boardobj.board[y + i][x + j] += block[i][j];
+		}
+	}
+
+	boardobj.DisplayBoard(gameobj);
+
+	return false;
 }

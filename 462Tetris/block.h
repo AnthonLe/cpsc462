@@ -15,6 +15,7 @@ public:
 	void Collidable(Board &obj);
 	void PlayerInput(Game &obj2, Board &obj);
 	void MoveBlock(Game &obj2, Board &obj, int, int);
+	bool RotateBlock(Board &obj, Game &obj2);
 
 	//The starting position coordinates for the blocks
 	int x = 4;
