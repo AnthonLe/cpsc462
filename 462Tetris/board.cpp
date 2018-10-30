@@ -64,21 +64,33 @@ void Board::DisplayBoard(Game &gameobj)
 		std::cout << std::endl;
 	}
 
+	std::cout << "Score: " << gameobj.nScore << "\n\n";
+
 	std::cout << "Controls:\tA = Left\n\t\tS = Down\n\t\tD = Right\n\t\tSpace = Rotate";
 
 	//check the gameover status
 	if (gameobj.gameover == true)
 	{
-		DisplayGameOver();
+		DisplayGameOver(gameobj);
 		clear();
 
 	}
 }
 
-int Board::DisplayGameOver()
+int Board::DisplayGameOver(Game gameobj)
 {
 	clear();
-	cout << "You suck\n";
+	cout << 
+		"==================================================================\n"
+		" #####  #####  #     # ######    #####  #       # ######  #####  #\n"
+		"#      #     # # # # # #        #     #  #     #  #      #     # #\n"
+		"#  ### ####### #  #  # ######   #     #   #   #   ###### # ####  #\n"
+		"#    # #     # #     # #        #     #    # #    #      #   #    \n"
+		"###### #     # #     # ######    #####      #     ###### #    #  #\n"
+
+		"==================================================================\n";
+
+	cout << "Final Score: " << gameobj.nScore << "\n\n";
 
 	system("pause");
 

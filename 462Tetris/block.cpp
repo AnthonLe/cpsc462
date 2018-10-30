@@ -9,7 +9,7 @@ using namespace std;
 
 bool Block::CreateBlock(Board &boardobj, Game &gameobj)
 {
-	//reeset coordinates to starting position
+	// reeset coordinates to starting position
 	x = 4;
 	y = 0;
 
@@ -17,18 +17,20 @@ bool Block::CreateBlock(Board &boardobj, Game &gameobj)
 	mt19937 eng(rd()); // seed the generator
 	uniform_int_distribution<> distr(0, 6); // define the range
 
-	//Create one of the 7 blocktypes randomly
-	int blocktype = distr(eng);
-	//cout << "\nblocktype: " << blocktype << endl;
+	// Create one of the 7 blocktypes randomly
+	bType = distr(eng);
 
-	//iterate through a 4x4 matrix to create a block using the randomly chosen blocktype integer
+	// 25 points per block
+	gameobj.nScore += 25;
+
+	// iterate through a 4x4 matrix to create a block using the randomly chosen blocktype integer
 	for (size_t i = 0; i < 4; i++)
 	{
 		for (size_t j = 0; j < 4; j++)
 		{
-			//reset the block index to be 0 first
+			// reset the block index to be 0 first
 			block[i][j] = 0;
-			block[i][j] = block_list[blocktype][i][j];
+			block[i][j] = block_list[bType][i][j];
 		}
 	}
 
@@ -99,6 +101,7 @@ void Block::Collidable(Board &boardobj) {
 void Block::PlayerInput(Game &gameobj, Board &boardobj)
 {
 	char key;
+	bool bRotateHold = false;
 
 	//get the key that was pressed
 	#ifdef _WIN32
@@ -127,7 +130,13 @@ void Block::PlayerInput(Game &gameobj, Board &boardobj)
 		}
 		break;
 	case ' ': //spacebar
-		RotateBlock(boardobj, gameobj);
+		if (!Collide(boardobj, x, y) && (!bRotateHold))
+		{
+			RotateBlock(boardobj, gameobj);
+			bRotateHold = true;
+		}
+		else
+			bRotateHold = false;
 	}
 
 }

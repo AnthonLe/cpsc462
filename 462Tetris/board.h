@@ -14,7 +14,7 @@ public:
 	
 	void CreateBoard(Game &obj);
 	void DisplayBoard(Game &obj);
-	int DisplayGameOver();
+	int DisplayGameOver(Game obj);
 
 	//+2 and +3 to account for the border
 	//This multidimensional array is used to help manipulate the blocks

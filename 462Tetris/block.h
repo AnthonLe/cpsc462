@@ -17,20 +17,24 @@ public:
 	void MoveBlock(Game &obj2, Board &obj, int, int);
 	bool RotateBlock(Board &obj, Game &obj2);
 
-	//The starting position coordinates for the blocks
+	// The starting position coordinates for the blocks
 	int x = 4;
 	int y = 0;
 
+	// Keep track of blocks
+	int bType = 0;
+
+
 	//Block definition is a 4x4 matrix
-	vector<vector<int>> block =
+	int block[4][4] =
 	{
 		{ 0, 0, 0, 0 },
 		{ 0, 0, 0, 0 },
 		{ 0, 0, 0, 0 },
 		{ 0, 0, 0, 0 }
 	};
-	//Multidimensional vector holding all the 7 blocks 
-	vector<vector<vector<int>>> block_list =
+	// Multidimensional vector holding all the 7 blocks 
+	int block_list[7][4][4]=
 	{
 		{	//Block 0
 			{ 0, 1, 0, 0 },
