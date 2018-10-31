@@ -65,7 +65,7 @@ int main()
 			cin >> ad;
 
 			admMenu.SetChoice(*brainTest, ad);
-		} while (ad != 3);
+		} while (ad != 4);
 	}
 
 	cout << "BYE\n";
