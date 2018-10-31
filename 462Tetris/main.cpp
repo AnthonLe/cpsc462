@@ -8,6 +8,7 @@
 
 #include "menu.h"
 #include "loginMenu.h"
+#include "admin.h"
 using namespace std;
 
 int main() 
@@ -17,9 +18,16 @@ int main()
 	Brain *brainTest = new Brain();
 	
 	loginMenu Tester;
-	Menu Test;
+	Menu playerMenu;
+	Admin admMenu;
+
+
+	int pass1 = 0;
+	int pass2 = 0;
+	
 	int ch = 0;
 	int c = 0;
+	int ad = 0;
 	
 	//be shown the login menu
 	do
@@ -27,18 +35,37 @@ int main()
 		Tester.DisplayLoginMenu();
 		cin >> ch;
 		Tester.SetChoice(ch);
-	} while (ch == 2);
+
+		
+		//to determine if user or admin
+		pass1 = Tester.getUserPass();
+		pass2 = Tester.getAdminPass();
+
+	} while (ch == 2 || (pass1 == 0 && pass2 == 0));
 	
-	//complete if able to login correctly
-	if (ch == 1) {
+	//redirects to player menu
+	if (ch == 1 && pass1 == 1) {
 		do
 		{
-			Test.DisplayWelcomeInterface();
+			playerMenu.DisplayWelcomeInterface();
 			cin >> c;
+
 			//create Game object to begin a new game
 			Game *gameTest = new Game();
-			Test.SetChoice(*gameTest, *brainTest, c);
+			playerMenu.SetChoice(*gameTest, *brainTest, c);
 		} while (c != 3);
+	}
+
+	//redirects to admin menu
+	else if (ch == 1 && pass2 == 1)
+	{
+		do
+		{
+			admMenu.displayAdminMenu();
+			cin >> ad;
+
+			admMenu.SetChoice(*brainTest, ad);
+		} while (ad != 3);
 	}
 
 	cout << "BYE\n";
