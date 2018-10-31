@@ -2,36 +2,30 @@
 #include <fstream>
 #include <string>
 #include "loginMenu.h"
+#include "clear.h"
 #include "game.h"
 #include "brain.h"
 
 using namespace std;
 
-//clear the console/terminal by creating a lot of newlines
-void loginMenu::clear()
-{
-	int n;
-	for (n = 0; n < 10; n++)
-		printf("\n\n\n\n\n\n\n\n\n\n");
-}
 
 void loginMenu::sendNAME()
 {
 	cout << "Enter your desired username: ";
 	cin >> userName;
-	cin.ignore(numeric_limits<streamsize>::max(), '\n');
+	cin.ignore((numeric_limits<streamsize>::max)(), '\n');
 };
 
 void loginMenu::sendPWORD()
 {
 	cout << "Enter your desired password: ";
 	cin >> pword;
-	cin.ignore(numeric_limits<streamsize>::max(), '\n');
+	cin.ignore((numeric_limits<streamsize>::max)(), '\n');
 };
 
 void loginMenu::DisplayLoginMenu()
 {
-	clear();
+	ClearScreen();
 	cout << "======================================================\n"
 		" #####  ###### #####  ######    ###    #####\n"
 		"   #    #        #    #     #    #    #     \n"
@@ -87,7 +81,7 @@ void loginMenu::login(ifstream & readFile)
 			if (username == playerList[j] && (username == admins[0] || username == admins[1] || username == admins[2]))
 
 			{
-				clear();
+				ClearScreen();
 				cout << "\nUsername found, checking password" << endl;
 				
 				if (password == playerList[j + 1])
@@ -102,7 +96,7 @@ void loginMenu::login(ifstream & readFile)
 			//checking if player's username and password is valid
 			else if (username == playerList[j] && (username != admins[0] || username != admins[1] || username != admins[2]))
 			{
-				clear();
+				ClearScreen();
 				cout << "\nUsername found, checking password" << endl;
 				
 				if (password == playerList[j + 1])

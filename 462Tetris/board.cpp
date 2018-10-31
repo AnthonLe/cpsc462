@@ -1,15 +1,9 @@
 #include "board.h"
 #include "game.h"
+#include "clear.h"
 #include <vector>
 #include <iostream>
 
-//clear the console/terminal by creating a lot of newlines
-void Board::clear()
-{
-	int n;
-	for (n = 0; n < 10; n++)
-		printf("\n\n\n\n\n\n\n\n\n\n");
-}
 
 void Board::CreateBoard(Game &gameobj)
 {
@@ -40,7 +34,7 @@ void Board::CreateBoard(Game &gameobj)
 void Board::DisplayBoard(Game &gameobj)
 {
 	//clear the terminal
-	clear();
+	ClearScreen();
 
 	//iterate through the multidimensional board vector
 	for (size_t i = 0; i < (BOARD_HEIGHT+1); i++)
@@ -72,14 +66,14 @@ void Board::DisplayBoard(Game &gameobj)
 	if (gameobj.gameover == true)
 	{
 		DisplayGameOver(gameobj);
-		clear();
+		ClearScreen();
 
 	}
 }
 
 int Board::DisplayGameOver(Game gameobj)
 {
-	clear();
+	ClearScreen();
 	cout << 
 		"==================================================================\n"
 		" #####  #####  #     # ######    #####  #       # ######  #####  #\n"
@@ -90,7 +84,8 @@ int Board::DisplayGameOver(Game gameobj)
 
 		"==================================================================\n";
 
-	cout << "Final Score: " << gameobj.nScore << "\n\n";
+	//-25 to offset score from block spawned at the end
+	cout << "Final Score: " << gameobj.nScore -25<< "\n\n";
 
 	system("pause");
 

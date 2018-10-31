@@ -8,14 +8,6 @@
 
 using namespace std;
 
-//clear the console/terminal by creating a lot of newlines
-void Menu::clear()
-{
-	int n;
-	for (n = 0; n < 10; n++)
-		printf("\n\n\n\n\n\n\n\n\n\n");
-}
-
 void Menu::DisplayWelcomeInterface()
 {
 	

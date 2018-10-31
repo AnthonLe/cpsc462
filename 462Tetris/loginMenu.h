@@ -22,6 +22,5 @@ public:
 
 private:
 	int DoChoice(int);
-	void clear();
 };
 
