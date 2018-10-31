@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <vector>
 #include "loginMenu.h"
 #include "clear.h"
 #include "game.h"
@@ -8,24 +9,41 @@
 
 using namespace std;
 
+int loginMenu::getAdminPass()
+{
+	return adminPass;
+}
+
+int loginMenu::getUserPass()
+{
+	return userPass;
+}
+
+void loginMenu::setAdminPass(int & adminPass)
+{
+	this->adminPass = adminPass;
+}
+
+void loginMenu::setUserPass(int & userPass)
+{
+	this->userPass = userPass;
+}
 
 void loginMenu::sendNAME()
 {
 	cout << "Enter your desired username: ";
 	cin >> userName;
-	cin.ignore((numeric_limits<streamsize>::max)(), '\n');
 };
 
 void loginMenu::sendPWORD()
 {
 	cout << "Enter your desired password: ";
 	cin >> pword;
-	cin.ignore((numeric_limits<streamsize>::max)(), '\n');
 };
 
 void loginMenu::DisplayLoginMenu()
 {
-	ClearScreen();
+	
 	cout << "======================================================\n"
 		" #####  ###### #####  ######    ###    #####\n"
 		"   #    #        #    #     #    #    #     \n"
@@ -36,7 +54,7 @@ void loginMenu::DisplayLoginMenu()
 
 		"======================================================\n";
 	
-	cout << "Welcome to the login menu...\n"
+	cout << "Welcome to the login menu\n"
 		"1) Login\n"
 		"2) Register\n"
 		"3) Exit Game\n"
@@ -44,7 +62,7 @@ void loginMenu::DisplayLoginMenu()
 
 }
 
-void loginMenu::login(ifstream & readFile)
+void loginMenu::login(ifstream & readFile, int & userPass, int & adminPass)
 {
 	string username;
 	string password;
@@ -52,7 +70,6 @@ void loginMenu::login(ifstream & readFile)
 	//string array of the admins
 	string admins[3] = { "Sarah", "Anthony", "Dominick" };
 
-	
 	int check = 0;
 
 	if (readFile.is_open())
@@ -66,16 +83,19 @@ void loginMenu::login(ifstream & readFile)
 		cout << endl;
 
 		//storing all the usernames and password into a string array
-		string playerList[20];
-		for (int i = 0; i < 20; i++)
+
+		vector<string> playerList;
+		string read = "";
+
+		while (readFile >> read)
 		{
-			readFile >> playerList[i];
+			playerList.push_back(read);
 		}
 
 		cout << "scanning for username..." << endl;
 		
 		//
-		for (int j = 0; j < 20; j += 2)
+		for (int j = 0; j < playerList.size(); j += 2)
 		{
 			//checking if user is admin
 			if (username == playerList[j] && (username == admins[0] || username == admins[1] || username == admins[2]))
@@ -87,9 +107,16 @@ void loginMenu::login(ifstream & readFile)
 				if (password == playerList[j + 1])
 				{
 					cout << "\nWelcome Admin " << username << "!" << endl;
-					//pass++;
 					check++;
+					adminPass++;
+					setAdminPass(adminPass);
 					break;
+				}
+
+				else
+				{
+					cout << "Invalid password " << endl;
+					
 				}
 			}
 
@@ -103,8 +130,15 @@ void loginMenu::login(ifstream & readFile)
 				{
 					cout << "\nWelcome User " << username << "!" << endl;
 					check++;
-					//pass++;
+					userPass++;
+					setUserPass(userPass);
 					break;
+				}
+				
+				else
+				{
+					cout << "Invalid password " << endl;
+
 				}
 			}
 
@@ -173,7 +207,7 @@ int loginMenu::DoChoice(int choice)
 	switch (choice)
 	{
 	case 1:
-		User.login(readFile);
+		User.login(readFile, userPass, adminPass);
 		break;
 	case 2:
 		User.registerPlayer(writeFile);
@@ -186,38 +220,10 @@ int loginMenu::DoChoice(int choice)
 		return -1;
 	}
 	return 0;
-
 }
 
 
-/*int main()
-{
-	ifstream readFile("PlayerList.txt");
-	ofstream writeFile("PlayerList.txt", ios::app);
-	Player playerInfo;
-	int choice = 0;
 
-	do
-	{
-		choice = playerInfo.startMenu();
 
-		switch (choice)
-		{
-		case 1:
-			playerInfo.login(readFile);
-			break;
-		case 2:
-			playerInfo.registerPlayer(writeFile);
-			break;
-		case 3:
-			cout << "Goodbye!" << endl;
-			break;
-		default:
-			cout << "Invalid selections" << endl;
-			break;
-		}
-	} while (choice == 2);
-	
-	return 0;
 
-}*/
+
