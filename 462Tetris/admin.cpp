@@ -58,16 +58,18 @@ void Admin::SetChoice(Brain &brainobj, int c)
 int Admin::DoChoice(Brain &brainobj, int choice)
 {
 	ifstream readFile("PlayerList.txt");
+	ofstream writeFile("PlayerList.txt", ios::app);
 	Admin adm1;
+	int index = 0;
 
 	switch (choice)
 	{
 	case 1:
 		ClearScreen();
-		adm1.viewPlayerList(readFile);
+		adm1.viewPlayerList(readFile, plList);
 		break;
 	case 2:
-		adm1.removePlayer();
+		adm1.removePlayer(readFile, plList, writeFile);
 		break;
 	case 3:
 		brainobj.DisplaySettingsMenu();
@@ -85,7 +87,7 @@ int Admin::DoChoice(Brain &brainobj, int choice)
 
 //displays list of players 
 //only username, passwords not shown
-void Admin::viewPlayerList(ifstream & readFile)
+void Admin::viewPlayerList(ifstream & readFile, vector<string>& plList)
 {
 
 	int count = 0;
@@ -93,7 +95,7 @@ void Admin::viewPlayerList(ifstream & readFile)
 	{
 		
 		//storing all the usernames and password into a vector string
-		vector<string> plList;
+		//vector<string> plList;
 		string read = "";
 
 		while (readFile >> read)
@@ -103,15 +105,63 @@ void Admin::viewPlayerList(ifstream & readFile)
 
 		//display list of players
 		cout << "List of usernames: " << endl;
-		for (vector<string>::iterator it = plList.begin(); it != plList.end(); it +=2)
+		for (vector<string>::iterator it = plList.begin(); it != plList.end(); it += 2)
+		{
 			cout << count << ") " << *it << endl;
+			count++;
+		}
+
 
 		readFile.close();
 	}
 
 }
 
-void Admin::removePlayer()
+void Admin::removePlayer(ifstream & readFile, vector<string>& plLis, ofstream & writeFile)
 {
+	int count = 0;
+	int index = 0;
+	cout << "What index would you like to remove the player from playerList?";
+	cin >> index;
 
+	if (readFile.is_open())
+	{
+		ClearScreen();
+		viewPlayerList(readFile, plList);
+		cout << endl;
+
+	
+		if (index == 0)
+		{
+			plList.erase(plList.begin() + index);
+			plList.erase(plList.begin() + index);
+		}
+
+		else
+		{
+			index++;
+	
+			plList.erase(plList.begin() + index);
+			plList.erase(plList.begin() + index);
+		}
+
+		//display list of players
+		cout << "List of updated usernames: " << endl;
+		for (vector<string>::iterator it = plList.begin(); it != plList.end(); it += 2)
+		{
+			cout << count << ") " << *it << endl;
+			count++;
+		}
+
+		
+	}
+	readFile.close();
+
+	/*if (writeFile.is_open())
+	{
+		for (int i = 0; i<plList.size(); i++)
+			writeFile << plList[i];
+		
+		writeFile.close();
+	}*/
 }
