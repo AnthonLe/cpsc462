@@ -13,6 +13,4 @@ public:
 private:
 	//int getChoice() { return choice; }
 	int DoChoice(Game &obj, Brain &obj2, int choice);
-	//clear the terminal
-	void clear();
 };

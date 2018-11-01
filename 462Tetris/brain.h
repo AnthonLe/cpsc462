@@ -13,7 +13,7 @@ public:
 	int DoChoice(int c);
 
 private:
-	void clear();
+	
 	//default difficulty is 5, ranges from 1-10
 	int difficulty = gamespeed / 4000;
 

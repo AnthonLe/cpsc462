@@ -3,34 +3,32 @@
 #include "menu.h"
 #include "game.h"
 #include "brain.h"
+
+#include "loginMenu.h";
+
 using namespace std;
 
-//clear the console/terminal by creating a lot of newlines
-void Menu::clear()
+void Menu::DisplayWelcomeInterface()
 {
-	int n;
-	for (n = 0; n < 10; n++)
-		printf("\n\n\n\n\n\n\n\n\n\n");
-}
-
-void Menu :: DisplayWelcomeInterface()
-{
-	clear();
+	
 	cout << "======================================================\n"
-		" #####  ###### #####  ######    ###    #####\n"
-		"   #    #        #    #     #    #    #     \n"
-		"   #    #####    #    ######     #     #####\n"
-		"   #    #        #    #   #      #          #\n"
-		"   #    ######   #    #     #   ###    #####\n"
+		"           #########  ###### #######  #     # \n"
+		"           #   #   #  #      #     #  #     # \n"
+		"           #   #   #  #####  #     #  #     # \n"
+		"           #   #   #  #      #     #  #     # \n"
+		"           #   #   #  ###### #     #  ####### \n"
 
 
 		"======================================================\n";
+
 	cout << "Menu Options\n"
 		"1) Start New Game\n"
 		"2) Change Settings\n"
 		"3) Exit Game\n"
 		">> ";
+
 }
+
 
 //function checks to see if a valid choice was made before setting it
 void Menu::SetChoice(Game &gameobj, Brain &brainobj, int c)
@@ -71,6 +69,5 @@ int Menu::DoChoice(Game &gameobj, Brain &brainobj, int choice)
 		return -1;
 	}
 	return 0;
-
 
 }

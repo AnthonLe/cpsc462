@@ -30,11 +30,9 @@ void Game::UpdateGame(Game &gameobj, Brain &brainobj, Board &boardobj)
 	//Create the first block
 	Block *blockTest = new Block();
 	blockTest->CreateBlock(boardobj, gameobj);
-	//cout << "\nhey bitch\n";
 
 	while (gameobj.gameover != true)
 	{
-		//cout << "hey im alive\n";
 
 		//run this code only for windows
 		#ifdef _WIN32

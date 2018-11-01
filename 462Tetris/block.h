@@ -12,7 +12,7 @@ public:
 	void SpawnBlock(Board &obj, Game &obj2);
 
 	bool Collide(Board &obj, int, int);
-	void Collidable(Board &obj);
+	void UpdateCollision(Board &obj);
 	void PlayerInput(Game &obj2, Board &obj);
 	void MoveBlock(Game &obj2, Board &obj, int, int);
 	bool RotateBlock(Board &obj, Game &obj2);

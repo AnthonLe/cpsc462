@@ -20,8 +20,6 @@ bool Block::CreateBlock(Board &boardobj, Game &gameobj)
 	// Create one of the 7 blocktypes randomly
 	bType = distr(eng);
 
-	// 25 points per block
-	gameobj.nScore += 25;
 
 	// iterate through a 4x4 matrix to create a block using the randomly chosen blocktype integer
 	for (size_t i = 0; i < 4; i++)
@@ -53,15 +51,22 @@ bool Block::CreateBlock(Board &boardobj, Game &gameobj)
 
 }
 
+//Update the current block position during gameplay
+//Also call CreateBlock when a block has been placed
 void Block :: SpawnBlock(Board &boardobj, Game &gameobj)
 {
+	//if there is no collision, update block to new coordinates
 	if (!Collide(boardobj, x, y + 1))
 	{
 		MoveBlock(gameobj, boardobj, x, y + 1);
 	}
+	//if a block has been placed, increase the score, update collision map, and create a new block
 	else
 	{
-		Collidable(boardobj);
+		// 25 points per block
+		gameobj.nScore += 25;
+
+		UpdateCollision(boardobj);
 		CreateBlock(boardobj, gameobj);
 		boardobj.DisplayBoard(gameobj);
 	}
@@ -70,6 +75,7 @@ void Block :: SpawnBlock(Board &boardobj, Game &gameobj)
 
 }
 
+//Checks to see if the current piece will collide with anything
 bool Block::Collide(Board &boardobj, int bx, int by)
 {
 	//check the block's 4x4 matrix
@@ -88,7 +94,8 @@ bool Block::Collide(Board &boardobj, int bx, int by)
 
 }
 
-void Block::Collidable(Board &boardobj) {
+//Store blocks that have been place in stage. This function updates the collision map
+void Block::UpdateCollision(Board &boardobj) {
 	for (size_t i = 0; i < (BOARD_HEIGHT+1); i++)
 	{
 		for (size_t j = 0; j < (BOARD_WIDTH+2); j++)

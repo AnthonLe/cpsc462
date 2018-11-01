@@ -24,5 +24,5 @@ public:
 
 
 private:
-	void clear();
+	
 };

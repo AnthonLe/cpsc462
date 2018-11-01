@@ -1,16 +1,11 @@
 #include "brain.h";
+#include "clear.h"
 #include<iostream>
 #include<iomanip>
 using namespace std;
 
 
 
-void Brain::clear()
-{
-	int n;
-	for (n = 0; n < 10; n++)
-		printf("\n\n\n\n\n\n\n\n\n\n");
-}
 
 void Brain :: SetSpeed() {
 	cout << "Set difficulty from 1-10 (Low number = slow speed, High number = fast speed)\n"
@@ -25,11 +20,12 @@ void Brain :: SetSpeed() {
 
 	cout << "\nDifficulty is set to: " << difficulty << endl;
 	system("pause");
+	ClearScreen();
 }
 
 void Brain::DisplaySettingsMenu()
 {
-	clear();
+	ClearScreen();
 	cout << "===========================================================\n"
 		" #####   ###### #####  #####  ###  ##    #    ######   #####   \n"
 		"#        #        #      #     #   # #   #   #        #        \n"
@@ -78,12 +74,15 @@ int Brain::DoChoice(int choice)
 	case 2:
 		cout << "Work in Progress\n";
 		system("pause");
+		ClearScreen();
 		break;
 	case 3:
+		ClearScreen();
 		return 0;
 	case 0:
 		cerr << "None of the options were chosen" << std::endl;
 		system("pause");
+		ClearScreen();
 		return -1;
 	}
 	return 0;
