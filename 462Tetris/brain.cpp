@@ -6,7 +6,6 @@ using namespace std;
 
 
 
-
 void Brain :: SetSpeed() {
 	cout << "Set difficulty from 1-10 (Low number = slow speed, High number = fast speed)\n"
 		">>";

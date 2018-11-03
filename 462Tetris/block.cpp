@@ -1,5 +1,4 @@
 #include "block.h"
-#include <vector>
 #include <random>
 #include <iostream>
 #include <conio.h>
@@ -94,7 +93,7 @@ bool Block::Collide(Board &boardobj, int bx, int by)
 
 }
 
-//Store blocks that have been place in stage. This function updates the collision map
+//Store blocks that have been placed on the stage. This function updates the collision map
 void Block::UpdateCollision(Board &boardobj) {
 	for (size_t i = 0; i < (BOARD_HEIGHT+1); i++)
 	{
