@@ -1,10 +1,8 @@
 #include <iostream>
 #include <vector>
-#include <random>
 #include <iomanip>
 #include "brain.h"
 #include "game.h"
-//#include <conio.h> //for kbhit and getch functions
 
 #include "menu.h"
 #include "loginMenu.h"

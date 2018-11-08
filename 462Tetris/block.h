@@ -8,7 +8,7 @@ public:
 	//creates a new block
 	bool CreateBlock(Board &obj, Game &obj2);
 
-	//
+	//Checks for collison, calls CreateBlock after a previous block has been placed
 	void SpawnBlock(Board &obj, Game &obj2);
 
 	bool Collide(Board &obj, int, int);
@@ -21,7 +21,7 @@ public:
 	int x = 4;
 	int y = 0;
 
-	// Keep track of blocks
+	// Keep track of block type from the block_list
 	int bType = 0;
 
 
@@ -33,7 +33,7 @@ public:
 		{ 0, 0, 0, 0 },
 		{ 0, 0, 0, 0 }
 	};
-	// Multidimensional vector holding all the 7 blocks 
+	// Multidimensional array holding all the 7 blocks 
 	int block_list[7][4][4]=
 	{
 		{	//Block 0
@@ -79,9 +79,6 @@ public:
 			{ 0, 0, 1, 0 }
 		}
 	};
-
-private:
-	
 
 };
 

@@ -1,6 +1,6 @@
 #include "clear.h"
 
-//From cplusplus.com
+//Code taken from cplusplus.com
 void ClearScreen()
 {
 	HANDLE                     hStdOut;

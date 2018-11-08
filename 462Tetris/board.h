@@ -1,6 +1,5 @@
 #pragma once
 #include <vector>
-//#include "game.h"
 using namespace std;
 
 #define BOARD_WIDTH 10				// Board width in blocks 
@@ -22,7 +21,4 @@ public:
 	//This multidimensional array is used to create the board
 	int board[BOARD_HEIGHT + 2][BOARD_WIDTH + 3];
 
-
-private:
-	
 };

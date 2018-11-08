@@ -1,7 +1,6 @@
 #include "board.h"
 #include "game.h"
 #include "clear.h"
-#include <vector>
 #include <iostream>
 
 
@@ -36,21 +35,21 @@ void Board::DisplayBoard(Game &gameobj)
 	//clear the terminal
 	ClearScreen();
 
-	//iterate through the multidimensional board vector
+	//iterate through the multidimensional board array
 	for (size_t i = 0; i < (BOARD_HEIGHT+1); i++)
 	{
 		for (size_t j = 0; j < (BOARD_WIDTH+2); j++)
 		{
-			//used the values stored from the initGame() function to create the border and empty space
+			//used the values stored from the CreateBoard() function to create the border and empty space
 			switch (board[i][j])
 			{
 			case 0:
 				std::cout << " " << std::flush;
 				break;
-			case 9:
+			case 9:		//border made of X
 				std::cout << "X" << std::flush;
 				break;
-			default:
+			default:	//blocks made of #
 				std::cout << "#" << std::flush;
 				break;
 			}

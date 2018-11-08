@@ -11,8 +11,8 @@ public:
 	int choice;
 	int adminPass = 0;
 	int userPass = 0;
-	char userName;
-	char pword;
+	string userName;
+	string pword;
 
 	void sendNAME();
 	void sendPWORD();

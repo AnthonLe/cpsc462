@@ -4,13 +4,9 @@
 #include "block.h"
 #include "brain.h"
 #include <iostream>
-#include <conio.h>
+#include <conio.h> //for getch and kbhit
 
 using namespace std;
-
-Game::Game() {
-
-}
 
 
 void Game::StartNewGame(Game &gameobj, Brain &brainobj)
