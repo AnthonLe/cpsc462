@@ -1,4 +1,5 @@
 #include "block.h"
+#include <vector>
 #include <random>
 #include <iostream>
 #include <conio.h>
@@ -36,9 +37,9 @@ bool Block::CreateBlock(Board &boardobj, Game &gameobj)
 	{
 		for (size_t j = 0; j < 4; j++)
 		{
-			//Move the generated block to the starting position on the board
+			// Move the generated block to the starting position on the board
 			boardobj.board[i][j + 4] = boardobj.stage[i][j + 4] + block[i][j];
-			//if the starting position is blocked, its a gameover
+			// if the starting position is blocked, its a gameover
 			if (boardobj.board[i][j + 4] > 1)
 			{
 				gameobj.gameover = true;
@@ -50,16 +51,16 @@ bool Block::CreateBlock(Board &boardobj, Game &gameobj)
 
 }
 
-//Update the current block position during gameplay
-//Also call CreateBlock when a block has been placed
+// Update the current block position during gameplay
+// Also call CreateBlock when a block has been placed
 void Block :: SpawnBlock(Board &boardobj, Game &gameobj)
 {
-	//if there is no collision, update block to new coordinates
+	// if there is no collision, update block to new coordinates
 	if (!Collide(boardobj, x, y + 1))
 	{
 		MoveBlock(gameobj, boardobj, x, y + 1);
 	}
-	//if a block has been placed, increase the score, update collision map, and create a new block
+	// if a block has been placed, increase the score, update collision map, and create a new block
 	else
 	{
 		// 25 points per block
@@ -74,15 +75,15 @@ void Block :: SpawnBlock(Board &boardobj, Game &gameobj)
 
 }
 
-//Checks to see if the current piece will collide with anything
+// Checks to see if the current piece will collide with anything
 bool Block::Collide(Board &boardobj, int bx, int by)
 {
-	//check the block's 4x4 matrix
+	// check the block's 4x4 matrix
 	for (size_t i = 0; i < 4; i++)
 	{
 		for (size_t j = 0; j < 4; j++)
 		{
-			//if there is an overlap, the block collided 
+			// if there is an overlap, the block collided 
 			if (block[i][j] && boardobj.stage[by + i][bx + j] != 0)
 			{
 				return true;
@@ -93,13 +94,24 @@ bool Block::Collide(Board &boardobj, int bx, int by)
 
 }
 
-//Store blocks that have been placed on the stage. This function updates the collision map
+// Store blocks that have been place in stage. This function updates the collision map
+// Locks blocks into place once they come into contact with a piece of stage
 void Block::UpdateCollision(Board &boardobj) {
+
 	for (size_t i = 0; i < (BOARD_HEIGHT+1); i++)
 	{
 		for (size_t j = 0; j < (BOARD_WIDTH+2); j++)
 		{
 			boardobj.stage[i][j] = boardobj.board[i][j];
+/*
+			// check to see if Board_Width has been reached
+			// If it has -> you have a line
+			if (j == BOARD_WIDTH)
+				blockobj.bLine = true;
+			{
+				// If you find a line, remove it
+				boardobj.stage[i][j] = boardobj.board[i][j - 1];
+			}*/
 		}
 	}
 }
