@@ -1,15 +1,19 @@
 #include <iostream>
 #include <vector>
 #include <iomanip>
+#include <string>
+#include <chrono>
 #include "brain.h"
 #include "game.h"
 
 #include "menu.h"
 #include "loginMenu.h"
 #include "admin.h"
+#include "Logger.h"
+
 using namespace std;
 
-int main() 
+int main(int argc, char *argv[])
 {
 
 	//create Brain object to change settings
@@ -19,13 +23,14 @@ int main()
 	Menu playerMenu;
 	Admin admMenu;
 
-
 	int pass1 = 0;
 	int pass2 = 0;
 	
 	int ch = 0;
 	int c = 0;
 	int ad = 0;
+
+	CLogger::GetLogger()->Log("UI being used and has been successfully initialized!");
 	
 	//be shown the login menu
 	do
@@ -47,6 +52,7 @@ int main()
 		{
 			playerMenu.DisplayWelcomeInterface();
 			cin >> c;
+			CLogger::GetLogger()->Log("Login Successful for Player!");
 
 			//create Game object to begin a new game
 			Game *gameTest = new Game();
@@ -61,13 +67,18 @@ int main()
 		{
 			admMenu.displayAdminMenu();
 			cin >> ad;
+			CLogger::GetLogger()->Log("Login Successful for Admin!");
 
 			admMenu.SetChoice(*brainTest, ad);
 		} while (ad != 4);
 	}
 
-	cout << "BYE\n";
-
+	else {
+		CLogger::GetLogger()->Log("Looks like something went wrong with logging in!");
+	}
 	
+	cout << "BYE\n";
+	CLogger::GetLogger()->Log("System is shut down succesfully");
+
 	return 0;
 }
