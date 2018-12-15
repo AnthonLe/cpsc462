@@ -21,6 +21,7 @@
 #include "Session.h"
 #include "game.h"
 #include "brain.h"
+#include "AdminSession.h"
 
 namespace UI
 {
@@ -28,9 +29,9 @@ namespace UI
 	SimpleUI::SimpleUI()
 		: _persistentData(new Persistence::PlayerList),   
 		_loggerPtr(new Logging::CLogger),    
-		_accounts(new AccountManagement::UserAccount),   
-		_game(new Tetris::Game),
-		_brains(new Tetris::Brain)
+		_accounts(new AccountManagement::UserAccount)  
+		//_game(new Tetris::Game),
+		//_brains(new Tetris::Brain)
 		//_boards(new Tetris::Board)
 	{
 		_logger << "Simple UI being used and has been successfully initialized";
@@ -142,7 +143,7 @@ namespace UI
 		// 4) Fetch functionality options for this role
 		std::unique_ptr<Tetris::Session> sessionControl = Tetris::Session::createSession(selectedRole);
 
-		std::vector<std::string> commands = sessionControl->getCommands();
+		//std::vector<std::string> commands = sessionControl->getCommands();
 		unsigned menuSelection;
 		int chn = 0;
 		do
@@ -162,33 +163,32 @@ namespace UI
 				std::cout << "Menu Options\n"
 					"1) Start New Game\n"
 					"2) Change Settings\n"
-					"3) Exit Game\n"
+					"3) View Scores\n"
+					"4) Exit Game\n"
 					">> ";
 
 				std::cin >> chn;
 
 				if (chn == 1)
 				{
-					//Game *gameTest = new Game();
-					//playerMenu.SetChoice(*gameTest, *brainTest, c);
-					//Brain *brainTest = new Brain();
-					//Tetris::Brain *brainTest = new Tetris::Brain;
-					std::unique_ptr<Tetris::Game> gameTest;
-					std::unique_ptr<Tetris::Brain> brainTest;
-					//std::unique_ptr<Tetris::Board> boardTest;
-
-					//playerMenu.SetChoice(*gameTest, *brainTest, chn);
-					_game->StartNewGame(*gameTest, *brainTest);
-					//_boards->CreateBoard(* gameTest);
-					//_game->UpdateGame(*gameTest, *brainTest, *boardTest);
+					Game *gameTest = new Game();
+					Brain *brainTest = new Brain();
+					gameTest->StartNewGame(*gameTest, *brainTest);
 				}
 
 				else if (chn == 2)
 				{
-					_brains->DisplaySettingsMenu();
+					Brain *brainTest = new Brain();
+					brainTest->DisplaySettingsMenu();
 				}
 
 				else if (chn == 3)
+				{
+					
+				
+				}
+
+				else if (chn == 4)
 				{
 					cout << "BYE\n";
 					//CLogger::GetLogger()->Log("System is shut down succesfully");
@@ -217,28 +217,24 @@ namespace UI
 				std::cout << "Menu Options for Admin\n"
 					"1) View PlayerList\n"
 					"2) Remove Players\n"
-					"3) Change Settings\n"
-					"4) Exit Game\n"
+					"3) Exit Game\n"
 					">> ";
 
 				std::cin >> chn;
 
 				if (chn == 1)
 				{
-					cout << endl;
+					std::unique_ptr<Tetris::AdminSession> persistentData;
+					persistentData->viewPlayerList();
 				}
 
 				else if (chn == 2)
 				{
-					cout << endl;
+					std::unique_ptr<Tetris::AdminSession> persistentData;
+					persistentData->removePlayer();
 				}
 
 				else if (chn == 3) 
-				{
-					cout << endl;
-				}
-				
-				else if (chn == 4)
 				{
 					cout << "BYE\n";
 					//CLogger::GetLogger()->Log("System is shut down succesfully");
@@ -252,10 +248,11 @@ namespace UI
 			}
 
 
-			for (unsigned i = 0; i != commands.size(); ++i)   std::cout << std::setw(2) << i << " - " << commands[i] << '\n';
+			/*for (unsigned i = 0; i != commands.size(); ++i)   std::cout << std::setw(2) << i << " - " << commands[i] << '\n';
 			std::cout << "  role (0-" << commands.size() - 1 << "): ";
-			std::cin >> menuSelection;
-		} while (menuSelection >= roleLegalValues.size());
+			std::cin >> menuSelection;*/
+			//menuSelection >= roleLegalValues.size()
+		} while (true);
 
 		//std::string selectedCommand = commands[menuSelection];
 		//_logger << "Selected command \"" + selectedCommand + "\" chosen";

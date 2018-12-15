@@ -9,8 +9,8 @@
 //#include "game.h"
 class Game;
 
-namespace Tetris
-{
+//namespace Tetris
+//{
 	class Board
 	{
 	public:
@@ -25,6 +25,6 @@ namespace Tetris
 		int board[BOARD_HEIGHT + 2][BOARD_WIDTH + 3];
 
 	};
-} // namespace Tetris
+//} // namespace Tetris
 
 #endif // Tetris_Board_h

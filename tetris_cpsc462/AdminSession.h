@@ -5,46 +5,71 @@
 #include <string>
 #include <vector>
 #include <iostream>
+#include <fstream>
+#include <iomanip>
 
 #include "Session.h"
+#include "PlayerList.h"
+#include "Logger.h"
+#include "PersistenceHandler.h"
 
 
 namespace Tetris
 {
-	class AdminSession : public Tetris::Session
+	class AdminSession :public Tetris::Session
 	{
 	public:
 		using Session::Session;  // inherit constructors
+		int choice;
 
-								 // Operations
-		std::vector<std::string> getCommands() override;  // retrieves the list of actions (commands) 
+		std::unique_ptr<Persistence::PersistenceHandler> persistentData;
 
+		//_persistentData(new Persistence::PlayerList);
 
-		void AdminSession::displayAdminMenu()
+		std::vector<std::string> plList;
+		//void displayAdminMenu();
+		//void SetChoice(Brain &, int);
+		void viewPlayerList()
 		{
-			std::cout << "======================================================\n"
-				"           #########  ###### #######  #     # \n"
-				"           #   #   #  #      #     #  #     # \n"
-				"           #   #   #  #####  #     #  #     # \n"
-				"           #   #   #  #      #     #  #     # \n"
-				"           #   #   #  ###### #     #  ####### \n"
+			ifstream readFile("PlayerList.txt");
+			int count = 0;
+			if (readFile.is_open())
+			{
+				//display list of players
+				cout << "List of usernames: " << endl;
 
+				//std::unique_ptr<Persistence::Playerlist> persistentData;
 
-				"======================================================\n";
+				//std::unique_ptr<Persistence::Playerlist> persistentData;
 
-			std::cout << "Menu Options for Admin\n"
-				"1) View PlayerList\n"
-				"2) Remove Players\n"
-				"3) Change Settings\n"
-				"4) Exit Game\n"
-				">> ";
+				//Playerlist player;
 
+				persistentData->viewPlayerList();
+
+				readFile.close();
+			}
+		}
+
+		void removePlayer() 
+		{
+			ifstream readFile("PlayerList.txt");
+			int count = 0;
+			if (readFile.is_open())
+			{
+
+				persistentData->removePlayer();
+
+				readFile.close();
+			}
 		}
 
 
 														  // Destructor
 														  // Pure virtual destructor helps force the class to be abstract, but must still be implemented
 		~AdminSession() noexcept override;
+
+	//private:
+		//int DoChoice(Brain &, int);
 	}; // class AdministratorSession
 
 
@@ -57,11 +82,6 @@ namespace Tetris
 	inline AdminSession::~AdminSession() noexcept
 	{}
 
-
-	inline std::vector<std::string> AdminSession::getCommands()
-	{
-		return{ "Showdown", "Reset Account", "Help" };
-	}
 
 } // namespace Tetris
 

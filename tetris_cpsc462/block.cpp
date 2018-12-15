@@ -1,5 +1,6 @@
 #include "block.h"
 #include "game.h"
+#include "board.h"
 
 #include <random>
 #include <iostream>
@@ -7,8 +8,8 @@
 
 
 
-namespace Tetris
-{
+//namespace Tetris
+//{
 	bool Block::CreateBlock(Board &boardobj, Game &gameobj)
 	{
 		// reeset coordinates to starting position
@@ -225,4 +226,4 @@ namespace Tetris
 
 		return false;
 	}
-}
+//}

@@ -17,7 +17,7 @@ namespace Tetris
 		using Session::Session;  // inherit constructors
 
 								 // Operations
-		std::vector<std::string> getCommands() override;  // retrieves the list of actions (commands) 
+		//std::vector<std::string> getCommands() override;  // retrieves the list of actions (commands) 
 
 
 														  // Destructor
@@ -35,11 +35,6 @@ namespace Tetris
 	inline PlayerSession::~PlayerSession() noexcept
 	{}
 
-
-	inline std::vector<std::string> PlayerSession::getCommands()
-	{
-		return{ "Playe Game", "Alter Settings", "Quit" };
-	}
 
 } // namespace Tetris
 

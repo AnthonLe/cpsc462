@@ -30,6 +30,70 @@ namespace Persistence
 		return{ "Player", "Administrator"};
 	}
 
+	void PlayerList::viewPlayerList() 
+	{
+		std::ifstream infile("PlayerList.txt");
+		std::vector<UserCredentials> Users;
+		std::vector<UserCredentials> plList;
+
+		string userName, passPhrase, role; //First and last name
+		UserCredentials player;
+		int count = 0;
+
+		if (infile.is_open())
+		{
+			while (infile >> player.userName >> player.passPhrase >> player.role)
+			{
+				Users.push_back(player);
+			}
+
+			for (const auto & e : storedUsers)
+			{
+				std::cout << e.userName << setw(10) << e.passPhrase << setw(10) << e.role << std::endl;
+			}
+
+			infile.close();
+		}
+
+	}
+
+	void PlayerList::removePlayer()
+	{
+		std::ifstream infile("PlayerList.txt");
+		int count = 0;
+		string usr = " ";
+		cout << "What username would you like to remove  from playerList?";
+		cin >> usr;
+
+		if (infile.is_open())
+		{
+			std::unique_ptr<Persistence::PersistenceHandler> persistentData;
+			persistentData->viewPlayerList();
+			cout << endl;
+
+			vector<UserCredentials> User;
+			UserCredentials newPlayer;
+
+
+			for (auto iter = User.begin(); iter != User.end(); ++iter) {
+				if (iter->userName == usr) {
+					iter = User.erase(iter);
+					break;
+				}
+			}
+
+			//display list of players
+			cout << "List of updated usernames: " << endl;
+			for (const auto & e : User)
+			{
+				std::cout << e.userName << setw(10) << e.passPhrase << setw(10) << e.role << std::endl;
+			}
+
+
+		}
+		infile.close();
+	}
+
 	void PlayerList::addPlayerCredentials(const std::string & name,
 		const std::string passPhrase, const std::string role)
 	{

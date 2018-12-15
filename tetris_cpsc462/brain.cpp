@@ -6,8 +6,8 @@
 #include<iomanip>
 
 
-namespace Tetris
-{
+//namespace Tetris
+//{
 	// Default constructor
 	Brain::Brain()
 		: _persistentData(new Persistence::PlayerList),
@@ -37,7 +37,7 @@ namespace Tetris
 		difficulty = s;
 
 		std::cout << "\nDifficulty is set to: " << difficulty << endl;
-		system("pause");
+		//system("pause");
 		ClearScreen();
 	}
 
@@ -106,4 +106,4 @@ namespace Tetris
 		return 0;
 
 	}
-}
+//}

@@ -2,13 +2,13 @@
 #define Tetris_Block_h
 
 #include "board.h"
-//#include "game.h"
+#include "game.h"
 
 class Board;
 class Game;
 
-namespace Tetris
-{
+//namespace Tetris
+//{
 	class Block
 	{
 	public:
@@ -87,7 +87,7 @@ namespace Tetris
 			}
 		};
 	};
-} // namespace Tetris
+//} // namespace Tetris
 
 #endif // Tetris_Block_h
 

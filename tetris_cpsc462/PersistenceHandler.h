@@ -38,6 +38,9 @@ namespace Persistence
 		virtual void			 addPlayerCredentials(const std::string & name, 
 									     const std::string passPhrase, const std::string role) = 0;
 
+		virtual void viewPlayerList() = 0;
+		virtual void removePlayer() = 0;
+
 		std::vector<UserCredentials>  storedUsers =
 		{
 			// Username    PassPhase         Authorized roles

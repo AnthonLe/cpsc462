@@ -7,8 +7,8 @@
 
 
 
-namespace Tetris
-{
+//namespace Tetris
+//{
 	void Board::CreateBoard(Game &gameobj)
 	{
 
@@ -112,4 +112,4 @@ namespace Tetris
 		return 0;
 	}*/
 
-}
+//}

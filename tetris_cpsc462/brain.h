@@ -10,8 +10,8 @@
 #include "brain.h"
 #include "PlayerList.h"
 
-namespace Tetris
-{
+//namespace Tetris
+//{
 	class Brain
 	{
 	public:
@@ -42,6 +42,6 @@ namespace Tetris
 		Logging::CLogger                            & _logger = *_loggerPtr;
 
 	};
-}  // namespace Tetris
+//}  // namespace Tetris
 
 #endif // Tetris_Brain_h

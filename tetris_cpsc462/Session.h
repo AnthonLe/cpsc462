@@ -21,7 +21,7 @@ namespace Tetris
 		virtual Session & operator=(Session && rhs) = default;  // move assignment
 
 																// Operations
-		virtual std::vector<std::string> getCommands() = 0;  // retrieves the list of actions (commands) 
+		//virtual std::vector<std::string> getCommands() = 0;  // retrieves the list of actions (commands) 
 
 															 // Object Factory returning a specialized object specific to the specified role
 		static std::unique_ptr<Session> createSession(const std::string & role);
