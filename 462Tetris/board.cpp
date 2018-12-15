@@ -1,10 +1,12 @@
 #include "board.h"
 #include "game.h"
 #include "clear.h"
+#include "score.h"
+#include <string>
 #include <iostream>
 
 
-void Board::CreateBoard(Game &gameobj)
+void Board::CreateBoard(Game &gameobj, Score &scoreobj)
 {
 
 	//20 is the board height
@@ -27,10 +29,10 @@ void Board::CreateBoard(Game &gameobj)
 		}
 	}
 
-	DisplayBoard(gameobj);
+	DisplayBoard(gameobj, scoreobj);
 }
 
-void Board::DisplayBoard(Game &gameobj)
+void Board::DisplayBoard(Game &gameobj, Score &scoreobj)
 {
 	//clear the terminal
 	ClearScreen();
@@ -64,13 +66,13 @@ void Board::DisplayBoard(Game &gameobj)
 	//check the gameover status
 	if (gameobj.gameover == true)
 	{
-		DisplayGameOver(gameobj);
+		DisplayGameOver(gameobj, scoreobj);
 		ClearScreen();
 
 	}
 }
 
-int Board::DisplayGameOver(Game gameobj)
+int Board::DisplayGameOver(Game gameobj, Score &scoreobj)
 {
 	ClearScreen();
 	cout << 
@@ -85,8 +87,18 @@ int Board::DisplayGameOver(Game gameobj)
 
 	//-25 to offset score from block spawned at the end
 	cout << "Final Score: " << gameobj.nScore -25<< "\n\n";
-
-	system("pause");
+	cout << "Save Score? 1 = Yes/ 2 = No\n"
+		">>";
+	int c;
+	string name;
+	cin >> c;
+	if (c == 1) {
+		cout << "Enter name >> ";
+		cin >> name;
+		cout << "\nScore Saved...\n";
+		scoreobj.SaveScore(name, gameobj.nScore);
+		system("pause");
+	}
 
 	return 0;
 }

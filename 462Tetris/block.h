@@ -1,6 +1,7 @@
 #pragma once
 #include "board.h"
 #include "game.h"
+#include "score.h"
 
 class Block
 {
@@ -9,13 +10,13 @@ public:
 	bool CreateBlock(Board &obj, Game &obj2);
 
 	//Checks for collison, calls CreateBlock after a previous block has been placed
-	void SpawnBlock(Board &obj, Game &obj2);
+	void SpawnBlock(Board &obj, Game &obj2, Score &obj3);
 
 	bool Collide(Board &obj, int, int);
 	void UpdateCollision(Board &obj);
-	void PlayerInput(Game &obj2, Board &obj);
-	void MoveBlock(Game &obj2, Board &obj, int, int);
-	bool RotateBlock(Board &obj, Game &obj2);
+	void PlayerInput(Game &obj2, Board &obj, Score &obj3);
+	void MoveBlock(Game &obj2, Board &obj, int, int, Score &obj3);
+	bool RotateBlock(Board &obj, Game &obj2, Score &obj3);
 
 	// The starting position coordinates for the blocks
 	int x = 4;

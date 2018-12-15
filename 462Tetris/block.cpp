@@ -52,12 +52,12 @@ bool Block::CreateBlock(Board &boardobj, Game &gameobj)
 
 //Update the current block position during gameplay
 //Also call CreateBlock when a block has been placed
-void Block :: SpawnBlock(Board &boardobj, Game &gameobj)
+void Block :: SpawnBlock(Board &boardobj, Game &gameobj, Score &scoreobj)
 {
 	//if there is no collision, update block to new coordinates
 	if (!Collide(boardobj, x, y + 1))
 	{
-		MoveBlock(gameobj, boardobj, x, y + 1);
+		MoveBlock(gameobj, boardobj, x, y + 1, scoreobj);
 	}
 	//if a block has been placed, increase the score, update collision map, and create a new block
 	else
@@ -67,7 +67,7 @@ void Block :: SpawnBlock(Board &boardobj, Game &gameobj)
 
 		UpdateCollision(boardobj);
 		CreateBlock(boardobj, gameobj);
-		boardobj.DisplayBoard(gameobj);
+		boardobj.DisplayBoard(gameobj, scoreobj);
 	}
 
 
@@ -104,7 +104,7 @@ void Block::UpdateCollision(Board &boardobj) {
 	}
 }
 
-void Block::PlayerInput(Game &gameobj, Board &boardobj)
+void Block::PlayerInput(Game &gameobj, Board &boardobj, Score &scoreobj)
 {
 	char key;
 	bool bRotateHold = false;
@@ -120,25 +120,25 @@ void Block::PlayerInput(Game &gameobj, Board &boardobj)
 	case 'd': //right
 		if (!Collide(boardobj, x + 1, y))
 		{
-			MoveBlock(gameobj, boardobj, x + 1, y);
+			MoveBlock(gameobj, boardobj, x + 1, y, scoreobj);
 		}
 		break;
 	case 'a': //left
 		if (!Collide(boardobj, x - 1, y))
 		{
-			MoveBlock(gameobj, boardobj, x - 1, y);
+			MoveBlock(gameobj, boardobj, x - 1, y, scoreobj);
 		}
 		break;
 	case 's': //down
 		if (!Collide(boardobj, x, y + 1))
 		{
-			MoveBlock(gameobj, boardobj, x, y + 1);
+			MoveBlock(gameobj, boardobj, x, y + 1, scoreobj);
 		}
 		break;
 	case ' ': //spacebar
 		if (!Collide(boardobj, x, y) && (!bRotateHold))
 		{
-			RotateBlock(boardobj, gameobj);
+			RotateBlock(boardobj, gameobj, scoreobj);
 			bRotateHold = true;
 		}
 		else
@@ -147,7 +147,7 @@ void Block::PlayerInput(Game &gameobj, Board &boardobj)
 
 }
 
-void Block::MoveBlock(Game &gameobj, Board &boardobj, int bx, int by)
+void Block::MoveBlock(Game &gameobj, Board &boardobj, int bx, int by, Score &scoreobj)
 {
 	//Remove block
 	for (size_t i = 0; i < 4; i++)
@@ -171,11 +171,11 @@ void Block::MoveBlock(Game &gameobj, Board &boardobj, int bx, int by)
 		}
 	}
 	//redisplay the block in its new position 
-	boardobj.DisplayBoard(gameobj);
+	boardobj.DisplayBoard(gameobj, scoreobj);
 
 }
 
-bool Block::RotateBlock(Board &boardobj, Game &gameobj)
+bool Block::RotateBlock(Board &boardobj, Game &gameobj, Score &scoreobj)
 {
 	//create 4x4 array to store the current block
 	int tmp[4][4];
@@ -218,7 +218,7 @@ bool Block::RotateBlock(Board &boardobj, Game &gameobj)
 		}
 	}
 
-	boardobj.DisplayBoard(gameobj);
+	boardobj.DisplayBoard(gameobj, scoreobj);
 
 	return false;
 }

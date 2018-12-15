@@ -9,17 +9,17 @@
 using namespace std;
 
 
-void Game::StartNewGame(Game &gameobj, Brain &brainobj)
+void Game::StartNewGame(Game &gameobj, Brain &brainobj, Score &scoreobj)
 {
 
 	//Create board object to create and display the board
 	Board *boardTest = new Board();
-	boardTest->CreateBoard(gameobj);
-	UpdateGame(gameobj, brainobj, *boardTest);
+	boardTest->CreateBoard(gameobj, scoreobj);
+	UpdateGame(gameobj, brainobj, *boardTest, scoreobj);
 
 }
 
-void Game::UpdateGame(Game &gameobj, Brain &brainobj, Board &boardobj)
+void Game::UpdateGame(Game &gameobj, Brain &brainobj, Board &boardobj, Score &scoreobj)
 {
 	size_t timer = 0;
 
@@ -35,7 +35,7 @@ void Game::UpdateGame(Game &gameobj, Brain &brainobj, Board &boardobj)
 		//_kbhit() checks if a key was pressed
 		if (_kbhit())
 		{
-			blockTest->PlayerInput(gameobj, boardobj);
+			blockTest->PlayerInput(gameobj, boardobj, scoreobj);
 		}
 		#endif
 
@@ -47,7 +47,7 @@ void Game::UpdateGame(Game &gameobj, Brain &brainobj, Board &boardobj)
 		//timer resets to 0 and spawns a new block
 		else
 		{
-			blockTest->SpawnBlock(boardobj, gameobj);
+			blockTest->SpawnBlock(boardobj, gameobj, scoreobj);
 			timer = 0;
 		}
 

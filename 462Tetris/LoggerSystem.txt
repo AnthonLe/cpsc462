@@ -1,0 +1,4 @@
+Tetris Game, version 1.0.4.2
+Log File Created
+
+[UI USED]: UI being used and has been successfully initialized!
