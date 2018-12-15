@@ -29,6 +29,9 @@ namespace Persistence
 		void	 addPlayerCredentials(const std::string & name, const std::string passPhrase,
 			const std::string role) override;
 
+		void viewPlayerList();
+		void removePlayer();
+
 
 		~PlayerList() noexcept override;
 
@@ -43,5 +46,6 @@ namespace Persistence
 }  // namespace Persistence
 
 #endif // Persistence_PlayerList_h
+
 
 
